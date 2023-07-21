@@ -1,0 +1,132 @@
+
+html, body, .container {
+    height: 100%;
+    margin: 0;
+
+
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: 93% 7%;
+    background-image: url("floor_bg_1.jpg");
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover; 
+
+
+  }
+  
+  /* The main content area takes the remaining width */
+  .main-content {
+    padding: 20px; /* Add some padding to separate from the sidebar */
+    opacity: 0.4;
+  }
+  
+  /* The sidebar */
+  .sidebar {
+    opacity: 0.7;
+    display: grid;
+    grid-template-rows: 10% 70% 10% 10%;
+    background-color: #4d4b4b;
+  }
+  
+  /* Optionally, you can add some styles to make the sidebar scrollable */
+  .sidebar {
+    overflow-y: auto;
+  }
+  
+ /* .sidebar div {
+    padding: 20px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    align-items: center;
+	/* justify-content: space-between; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+/*  
+  } */ 
+
+.item1{ 
+    /* background-color: #FFC0CB; */
+
+    background-repeat: no-repeat; 
+    background-position: center;
+    padding: 10px 20px 10px 20px; 
+}
+
+.item2{
+    /* background-color: #FFA07A;  */
+}
+.item2 div .btn {
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    border-radius: 0.2rem;
+    color: #FFFFFF;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 70%;
+    padding: 10%;
+    
+
+}
+
+
+.buttons{
+    height: 10%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+ /* .buttons{
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 0.2rem;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    text-align: center;s
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+ } */
+
+.item3{ 
+    /* background-color: #7fce86; */
+    background-image: url(meniu_button_acces_card.svg);
+    background-repeat: no-repeat; 
+    background-position: center;
+    /* padding: 10px 20px 10px 20px;  */
+} 
+.item4 { 
+    /* background-color: #87CEFA;     */
+    background-repeat: no-repeat; 
+    background-position: center;
+    padding: 10px 10px 10px 10px;
+}
+
+/* .item4 div .btn {
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 0.2rem;
+    color: #FFFFFF;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 70%;
+    padding: 10%;
+}
+  */
