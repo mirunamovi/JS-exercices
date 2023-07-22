@@ -72,6 +72,12 @@ html, body, .container {
     transform: translateY(-50%);
     font-size: 70%;
     padding: 10%;
+    cursor: pointer;
+    width: 100%; /* Make the buttons take full width of the buttons-container */
+    max-width: 70%; /* Limit the maximum width of the buttons to 70% of the container */
+    min-width: 50%;
+    height: 100%;
+    max-height: 70%;
     
 
 }
@@ -108,6 +114,10 @@ html, body, .container {
     background-image: url(meniu_button_acces_card.svg);
     background-repeat: no-repeat; 
     background-position: center;
+    flex: 0 0 10%; /* 10% width for the sticked divs */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     /* padding: 10px 20px 10px 20px;  */
 } 
 .item4 { 
@@ -115,18 +125,28 @@ html, body, .container {
     background-repeat: no-repeat; 
     background-position: center;
     padding: 10px 10px 10px 10px;
+    flex: 0 0 10%; /* 10% width for the sticked divs */
+      display: flex;
+      align-items: center;
+      justify-content: center;
 }
-
-/* .item4 div .btn {
+.item4 div .btn {
     background-color: transparent;
-    border: 1px solid grey;
+    border: 1px solid #FFFFFF;
     border-radius: 0.2rem;
     color: #FFFFFF;
+    width: 50%;
     position: absolute;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     font-size: 70%;
     padding: 10%;
+    cursor: pointer;
+    width: 100%; /* Make the buttons take full width of the buttons-container */
+    max-width: 70%; /* Limit the maximum width of the buttons to 70% of the container */
+    min-width: 50%;
+    height: 100%;
+    max-height: 70%;
 }
-  */
+  
