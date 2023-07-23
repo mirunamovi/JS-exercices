@@ -6,120 +6,144 @@
   <title>Custom Structured Vertical Flexbox Sidebar on the Right</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      height: 100%;
-      overflow: hidden; /* Prevent scrolling */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100%;
+        overflow: hidden; /* Prevent scrolling */
     }
     body {
-      display: flex;
+        display: flex;
     }
     .container {
-      display: flex;
-      flex: 1;
-      height: 100%; /* Make the container full height of the viewport */
-      background-image: url("floor_bg_1.jpg");
+        display: flex;
+        flex: 1;
+        height: 100%; /* Make the container full height of the viewport */
+        background-image: url("floor_bg_1.jpg");
         background-repeat: no-repeat; 
-         background-position: center;
-         background-size: cover; 
+        background-position: center;
+        background-size: cover; 
 
     }
     .sidebar {
-      flex: 0 0 8%; /* Adjust the sidebar width as needed */
-      opacity: 0.7;
-      background-color: #303030;
-      padding: 0.5rem;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      height: 100%; /* Make the sidebar full height */
-      order: 2; /* Move the sidebar to the right */
-      align-items: stretch;
-      position: sticky;
+        flex: 0 0 8%; /* Adjust the sidebar width as needed */
+        opacity: 0.7;
+        background-color: #303030;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Make the sidebar full height */
+        order: 2; /* Move the sidebar to the right */
+     
       
     }
     .stick-div {
-      flex: 0 0 10%; /* 10% width for the sticked divs */
-      flex-shrink: 1; 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5%;
+        flex: 0 0 10%; /* 10% width for the sticked divs */
+        flex-shrink: 1; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5%;
     }
     .buttons-container {
         flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Center the buttons horizontally within the buttons-container */
-      justify-content: center; /* Center the buttons vertically within the buttons-container */ 
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the buttons horizontally within the buttons-container */
+        justify-content: center; /* Center the buttons vertically within the buttons-container */ 
     }
     .button {
-      flex-shrink: 2; 
-      padding: 0.1rem; /* Adjust padding as needed */
-      background-color: transparent;
-      color: #fff;
-      border: 1px solid #FFFFFF;
-      border-radius: 0.2rem;
-      margin-bottom: 15px; /* Increase the distance between buttons */
-      cursor: pointer;
-      width: 100%; /*Make the buttons take full width of the buttons-container*/
-      max-width: 70%; /* Limit the maximum width of the buttons to 70% of the container */
-      min-width: 50%;
-      height: 100%;
-      max-height: 70%;
+        flex-shrink: 2; 
+        padding: 0.1rem; /* Adjust padding as needed */
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #FFFFFF;
+        border-radius: 0.2rem;
+        margin-bottom: 15px; /* Increase the distance between buttons */
+        cursor: pointer;
+        width: 100%; /*Make the buttons take full width of the buttons-container*/
+        max-width: 70%; /* Limit the maximum width of the buttons to 70% of the container */
+        min-width: 50%;
+        height: 100%;
+        max-height: 70%;
       
     }
-    .main-content {
-      flex: 1;
-      padding: 20px;
-      box-sizing: border-box;
-      order: 1; /* Move the main content to the left */
+    .buttons-container .button:hover {
+         background-color: black;
     }
+
     .stick-div .button {
-      padding: 0.1rem; /* Adjust padding as needed */
-      background-color: transparent;
-      color: #fff;
-      border: 1px solid #FFFFFF;
-      border-radius: 0.2rem;
-      margin-bottom: 20px; /* Increase the distance between buttons */
-      margin-top: 20px; /* Increase the distance between buttons */
-      cursor: pointer;
-      width: 100%; /* Make the buttons take full width of the buttons-container */
-      min-height: 70%;
-      font-size: 10px;
-      align-items: center;
+        padding: 0.1rem; /* Adjust padding as needed */
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #FFFFFF;
+        border-radius: 0.2rem;
+        margin-bottom: 20px; /* Increase the distance between buttons */
+        margin-top: 20px; /* Increase the distance between buttons */
+        cursor: pointer;
+        width: 100%; /* Make the buttons take full width of the buttons-container */
+        min-height: 70%;
+        font-size: 10px;
+        align-items: center;
+    }
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        order: 1; /* Move the main content below the sidebar */
+        padding-top: 1rem;
+        padding-left: 4rem;
 
 
     }
+    .header {
+        color: #fff;
+        padding: 2rem; /* Add some padding to the header */
+        box-sizing: border-box;
+        min-width: none;
+        max-width: 20rem;
+        min-height: auto;
+        background-image: url(ntt-logo-cxp.svg);
+        background-repeat: no-repeat; 
+        background-position: left;
+        background-size: contain;
+    }
+    .footer {
+        color: #fff;
+        padding-bottom: 0.7rem; /* Add some padding to the footer */
+        box-sizing: border-box;
+        margin-top: auto;
+    }
+    .article{
+        padding-top: 1rem;
+        
+    }
+    .article .buttonz{
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #FFFFFF;
+        border-radius: 0.2rem;
+        cursor: pointer;
+        min-height: 70%;
+        font-size: 10px;
+        padding: 0.5rem 2rem;
+    }
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        background-color: #f2f2f2;
+        padding: 15px;
+         border: 1px solid #888;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 0.2rem;
+    }
 
-/* Adjust the position of the main content to accommodate the header */
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  order: 1; /* Move the main content below the sidebar */
-}
-.header {
-    color: #fff;
-    padding: 2rem; /* Add some padding to the header */
-    box-sizing: border-box;
-}
-.footer {
-  color: #fff;
-  padding-left: 2rem; /* Add some padding to the footer */
-  padding-bottom: 0.7rem; /* Add some padding to the footer */
-  box-sizing: border-box;
-  margin-top: auto;
-}
-.article{
-    padding-left: 2rem; /* Add some padding to the header */
-
-}
-.article .buttonz{
-    width: 10%;
-}
   </style>
 </head>
 <body>
@@ -129,24 +153,27 @@
         <img src = "logout.svg" style="width: 40%; height: 40%;">
     </div>
     <div class="buttons-container">
-        <button class="button">10</button>
-        <button class="button">9</button>
-        <button class="button">8</button>
-        <button class="button">7</button>
-        <button class="button">6</button>
-        <button class="button">5</button>
-        <button class="button">4</button>
-        <button class="button">3</button>
-        <button class="button">2</button>
-        <button class="button">1</button>
+        <button class="button" name="10">10</button>
+        <button class="button" name="9">9</button>
+        <button class="button" name="8">8</button>
+        <button class="button" name="7">7</button>
+        <button class="button" name="6">6</button>
+        <button class="button" name="5">5</button>
+        <button class="button" name="4">4</button>
+        <button class="button" name="3">3</button>
+        <button class="button" name="2">2</button>
+        <button class="button" name="1">1</button>
+      </div>
+      <div id="popup" class="popup">
+        <p id="popup-message"></p>
       </div>
       <div class="stick-div"><img src = "meniu_button_acces_card.svg"></div>
       <div class="stick-div"><button class="button">Wir &hearts; <br>NTTDATA</button></div>
     </div>
     <div class="main-content">
         <div class="header">
-            <img src = "ntt-logo-cxp.svg">
-          </div>
+            <!-- <svg src = "ntt-logo-cxp.svg" style="viewBox: "0 0 100 100"></svg> -->
+        </div>
         <div class="article">
             <button class="buttonz">&#8592; Zuruck</button>
         </div>
@@ -155,5 +182,23 @@
         </div>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".sidebar .buttons-container .button");
+        const popup = document.getElementById("popup");
+        const popupMessage = document.getElementById("popup-message");
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const level = button.getAttribute("name");
+                popupMessage.textContent = `You are at level ${level}`;
+                popup.style.display = "block";
+                setTimeout(function () {
+                    popup.style.display = "none";
+                 }, 2000); // Hide popup after 3 seconds (3000 milliseconds)
+            });
+        });
+    });
+  </script>
 </body>
 </html>
