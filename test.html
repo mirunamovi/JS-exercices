@@ -25,6 +25,39 @@
         background-size: cover; 
 
     }
+    .container .circle1 {
+        position: absolute;
+        top: 20%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        border-color: #FFFFFF;
+        background-color: #ffffff;
+        color: white;
+        padding: 1rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    
+
+    .container .circle2 {
+        position: absolute;
+        top: 38%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        color: white;
+        padding: 12px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
+        border-radius: 50%;
+    }
     .sidebar {
         flex: 0 0 8%; /* Adjust the sidebar width as needed */
         opacity: 0.7;
@@ -130,10 +163,10 @@
         font-size: 10px;
         padding: 0.5rem 2rem;
     }
-    .popup {
+    .popup1 {
         display: none;
         position: fixed;
-        top: 0;
+        top: 3%;
         left: 50%;
         transform: translateX(-50%);
         z-index: 999;
@@ -143,11 +176,49 @@
          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 0.2rem;
     }
+    .popup2 {
+        display: none;
+        position: fixed;
+        top: 25%;
+        left: 45%;
+        transform: translateX(-50%);
+        z-index: 800;
+        background-color: #f2f2f2;
+        padding: 0.5rem;
+        border: 1px solid #888;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 0.2rem;
+        font-size: medium;
+        max-width: 10rem;
 
+    }
+    .popup3 {
+        display: none;
+        position: fixed;
+        top: 43%;
+        left: 65%;
+        transform: translateX(-50%);
+        z-index: 800;
+        background-color: #f2f2f2;
+        padding: 0.5rem;
+        border: 1px solid #888;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 0.2rem;
+        font-size: medium;
+
+    }
   </style>
 </head>
 <body>
   <div class="container">
+        <button class="circle1" onclick="togglePopup('popup2')"></button>
+        <div id="popup2" class="popup2">
+            <p id="popup-message2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+        <button class="circle2" onclick="togglePopup('popup3')"></button>
+        <div id="popup3" class="popup3">
+            <p id="popup-message3">Towards Olympus.</p>
+        </div>
     <div class="sidebar">
       <div class="stick-div">
         <img src = "logout.svg" style="width: 40%; height: 40%;">
@@ -164,16 +235,14 @@
         <button class="button" name="2">2</button>
         <button class="button" name="1">1</button>
       </div>
-      <div id="popup" class="popup">
-        <p id="popup-message"></p>
-      </div>
-      <div class="stick-div"><img src = "meniu_button_acces_card.svg"></div>
+      <div class="stick-div" onclick="buttonColor()"><img src = "meniu_button_acces_card.svg" id="img"></div>
       <div class="stick-div"><button class="button">Wir &hearts; <br>NTTDATA</button></div>
     </div>
     <div class="main-content">
-        <div class="header">
-            <!-- <svg src = "ntt-logo-cxp.svg" style="viewBox: "0 0 100 100"></svg> -->
-        </div>
+        <div id="popup1" class="popup1">
+            <p id="popup-message1"></p>
+          </div>
+        <div class="header"></div>
         <div class="article">
             <button class="buttonz">&#8592; Zuruck</button>
         </div>
@@ -183,22 +252,64 @@
     </div>
   </div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+
+        let listLevelcheckList = {
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+            5: false,
+            6: false,
+            7: false,
+            8: false,
+            9: false,
+            10: false,
+        };  
         const buttons = document.querySelectorAll(".sidebar .buttons-container .button");
-        const popup = document.getElementById("popup");
-        const popupMessage = document.getElementById("popup-message");
+        const circle1 = document.querySelector(".container .circle1");
+        const popup1 = document.getElementById("popup1");
+        const popup1Message = document.getElementById("popup-message1");
+        let history = [];
+        const img = document.getElementById("img");
 
         buttons.forEach(function (button) {
             button.addEventListener("click", function () {
-                const level = button.getAttribute("name");
-                popupMessage.textContent = `You are at level ${level}`;
-                popup.style.display = "block";
+                const name = button.getAttribute("name");
+                popup1Message.textContent = `You are at level ${name}`;
+                popup1.style.display = "block";
                 setTimeout(function () {
-                    popup.style.display = "none";
+                    popup1.style.display = "none";
                  }, 2000); // Hide popup after 3 seconds (3000 milliseconds)
+                history.push(name);
+                if(listLevelcheckList[history.slice(-1)] == false){
+                    img.src = "meniu_button_acces_card.svg";
+                
+                 }
+                 else{
+                    img.src = "meniu_button_acces_card2.svg";
+
+                 }
+                // console.log(listLevelcheckList);
+
             });
         });
-    });
+    
+    function togglePopup(param) {
+            const popup = document.querySelector("." + param);
+            if (popup.style.display === "none") {
+                popup.style.display = "block";
+            } else {
+                 popup.style.display = "none";
+             }
+        } 
+    function buttonColor(){
+            listLevelcheckList[history.slice(-1)] = true;
+            img.src = "meniu_button_acces_card2.svg";
+            history = [];
+            // console.log(listLevelcheckList);
+
+        }
+  
   </script>
 </body>
 </html>

@@ -57,9 +57,6 @@ html, body, .container {
     padding: 10px 20px 10px 20px; 
 }
 
-.item2{
-    /* background-color: #FFA07A;  */
-}
 .item2 div .btn {
     background-color: transparent;
     border: 1px solid #FFFFFF;
