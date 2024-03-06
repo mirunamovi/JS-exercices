@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note</title>
+  <script src="https://kit.fontawesome.com/a2e13da4a9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css-reset.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <section  id="creating-note" class="creating-note">
+      <input class="title hidden" type="text" placeholder="Title" name="title" id="title">
+      <input class="description" type="text" placeholder="Take a note.." name="description" id="description">
+      <div class="icons hidden" id="icons">
+          <i class="fa-solid fa-palette"></i>
+          <i class="fa-regular fa-image"></i>
+          <button id="submit" class="note-btn">Done</button>
+      </div>
+  </section>
+  <div class="notes" id="notes">
+    <div id="outlet"></div>
+    <template id="noteTemplate">
+      <div class="note-area-content js-note-area-content">
+        <h3 class="note-area-content-title"></h3>
+        <p class="note-area-content-body"></p>
+        <div class="note-area-content-footer">
+          <i class="fa-solid fa-palette"></i>
+          <i class="fa-regular fa-image"></i>
+          <i class="material-icons item-section-icons js-delete">delete</i>
+          <div class="color-palette"></div>
+        </div>
+      </div>
+    </template>
+</div>
+  <script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
