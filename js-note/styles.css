@@ -1,3 +1,8 @@
+
+html, body {
+  min-height: 100%;
+}
+
 html {
   height: 100%;
 }
@@ -5,25 +10,22 @@ html {
 body {
   min-height: 100%;
   overflow-y: auto;
-}
-
-body {
   margin: 0;
-  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
 }
 
 .creating-note {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 90vw;
-    max-width: 600px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 90vw;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
@@ -33,31 +35,27 @@ input {
 }
 
 .icons {
-  align-self: start;
+  align-self: center;
   padding-top: 20px;
 }
 
-/* .hidden {
-  display: none;
-} */
-
+#outlet {
+  width: 100%;
+}
 .notes {
   width: 100%;
-  position: absolute;
-  top: 35%;
-  /* left: 50%; */
-  /* transform: translate(-50%,-50%); */
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+  grid-auto-rows: 180px;
+  gap: 20px;
 }
 
+
 .note-area-content {
-  position: relative;
   width: 50vw;
   max-width: 300px;
   height: 180px;
-  margin: auto;
-  margin-top: 80px;
-  float: left;
-  margin-left: 40px;
   text-align: center;
   background-color: rgb(250, 250, 250);
   border-radius: 10px;
@@ -71,3 +69,21 @@ input {
   height: 60px;
 }
 
+i .fa-solid .fa-circle-check::before{
+  width: 100px;
+  height: 100px;
+}
+
+/* @media screen and (max-width: 800px) {
+  body {
+    min-height: 100%;
+    overflow-y: auto;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 0.5fr 2fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+  }
+} */

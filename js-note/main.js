@@ -1,5 +1,5 @@
 
-  'use strict'
+'use strict'
   
 const pageBody = document.body;
 const title = document.getElementById('title');
@@ -7,14 +7,12 @@ const description = document.getElementById('description');
 const icons = document.getElementById('icons');
 const newNote = document.getElementById('creating-note');
 const submit = document.getElementById('submit');
-
 let isToggled = false;
 let noteStored = [];
-
 const template = document.querySelector('template').content;
 const h3 = template.querySelector('h2');
 const p = template.querySelector('p');
-const element = template.querySelector('.js-note-area-content');
+const element = template.querySelector('.note-area-content');
 
 document.addEventListener('DOMContentLoaded', function () {
   init();
@@ -93,7 +91,7 @@ function renderNote(data) {
   titleElement.textContent = data.titleNode;
   bodyElement.textContent = data.descriptionNode;
 
-  document.querySelector('#outlet').appendChild(newNoteElement);
+  document.querySelector('#notes').appendChild(newNoteElement);
 }
 
 
