@@ -12,8 +12,9 @@ body {
   overflow-y: auto;
   margin: 0;
   display: grid;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
+  padding-top: 50px;
   justify-items: center;
   align-items: center;
   align-content: center;
@@ -26,25 +27,42 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 input {
   width: 100%;
   height: 50px;
   border-radius: 10px;
+  border: none;
+  padding-bottom: 20px;
+}
+
+.description {
+  width: 100%;
+  height: 50px;
+}
+
+#description:focus, #title:focus{
+  outline: none;
 }
 
 .icons {
-  align-self: center;
+  align-self: start;
   padding-top: 20px;
+}
+
+.hidden{
+  display: none;
 }
 
 #outlet {
   width: 100%;
 }
 .notes {
-  width: 100%;
+  width: 90vw;
   height: 100%;
+  padding-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
   grid-auto-rows: 180px;
@@ -53,13 +71,14 @@ input {
 
 
 .note-area-content {
-  width: 50vw;
+  width: 40vw;
   max-width: 300px;
   height: 180px;
   text-align: center;
   background-color: rgb(250, 250, 250);
-  border-radius: 10px;
-  border: 2px solid black
+  border-radius: 18px;
+  border: 2px solid black;
+  position: relative;
 }
 
 .note-area-content-body,
@@ -69,21 +88,42 @@ input {
   height: 60px;
 }
 
-i .fa-solid .fa-circle-check::before{
-  width: 100px;
-  height: 100px;
+.fa-check-circle, .fa-circle-check {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: -4%;
+  transform: translate(-4%, -5%);
 }
+.hid, .hidd {
+  display: none;
+}
+/* 
+.note-area-content-footer{
+  display: none;
 
-/* @media screen and (max-width: 800px) {
-  body {
-    min-height: 100%;
-    overflow-y: auto;
-    margin: 0;
-    display: grid;
-    grid-template-rows: 0.5fr 2fr;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
-  }
 } */
+
+/* .fa-circle-check:before {
+  display: block;
+} */
+
+/* .note-area-content:hover .fa-check-circle::before,
+.note-area-content:hover .fa-circle-check::before {
+  display: block;
+  position: absolute;
+  top: 0%;
+  left: -4%;
+  transform: translate(-4%, -5%);
+  opacity: 0.5;
+} */
+
+
+@media screen and (max-width: 700px) {
+  .fa-check-circle, .fa-circle-check{
+    position: absolute;
+    top: -0%;
+    left: -6%;
+    transform: translate(-4%, -5%);
+  }
+}
