@@ -21,12 +21,13 @@ let checkedIcon_prev = null;
 let checkedIcons_prev = null;
 
 
+
 document.addEventListener('DOMContentLoaded', function () {
   init();
 });
 
 function init() {
-  
+  console.log(isToggled);
   getStoredData();
   noteStored.forEach(function (note) {
     renderNote(note);
@@ -45,22 +46,28 @@ function toggle(x){
   }
   changeInputOnToggleState(title, newNote, icons);
   isToggled = !isToggled;
-  console.log(isToggled);
 
 }
 
 function changeInputOnToggleState(title, newNote, icons) {
   if (isToggled) {
       title.style.display = 'none';
-      newNote.style.height = '46px';
+
+      newNote.style.height = '73px';
+      newNote.style.border = '2px solid black';
+      newNote.style.borderRadius = '11px';
+      newNote.style.padding = '10px';
+
       icons.style.display = 'none';
   } else {
       title.style.display = 'block';
       title.style.border = 'none';
       title.style.paddingBottom = '30px';
+
       newNote.style.height = 'auto';
       newNote.style.border = '2px solid black';
       newNote.style.borderRadius = '11px';
+
       title.style.paddingTop = '20px';
       icons.style.display = 'block';
       icons.style.paddingBottom = '10px';
@@ -68,15 +75,21 @@ function changeInputOnToggleState(title, newNote, icons) {
 }
 
 function getNodeData(){
+  if(title.value !== '' && description.value !== ''){
+    const titleNode = title.value;
+    console.log(titleNode);
+    const descriptionNode = description.value;
+    console.log(descriptionNode);
+    const idNode = guid();
+    const noteData = { idNode, titleNode, descriptionNode};
 
-  const titleNode = title.value;
-  const descriptionNode = description.value;
-  const idNode = guid();
-  const noteData = { idNode, titleNode, descriptionNode};
-
-  resetInputFields()
+    resetInputFields()
+    return noteData;
+  }
+  else {
+    return null;
+  }
   
-  return noteData;
 }
 
 function guid() {
@@ -99,8 +112,9 @@ function saveNode(){
   if (note) {
     noteStored.push(note);
     localStorage.setItem('notes', JSON.stringify(noteStored));
+    renderNote(note);
   }
-  renderNote(note);
+  
 
 }
 
@@ -114,15 +128,38 @@ function renderNote(data) {
   const titleElement = newNoteElement.querySelector('.note-area-content-title');
   const bodyElement = newNoteElement.querySelector('.note-area-content-body');
 
- 
 
   idElement.id = data.idNode;
   titleElement.textContent = data.titleNode;
   bodyElement.textContent = data.descriptionNode;
 
+
   document.querySelector('#notes').appendChild(newNoteElement);
   document.querySelector('#' + data.idNode).addEventListener('click', handleElementClick);
+  document.querySelector('#' + data.idNode).querySelector('.fa-trash').addEventListener('click', handleDeleteClick);
 
+}
+
+function handleDeleteClick(ev){
+  ev.stopPropagation();
+  let deleteBtn = ev.target;
+  deleteNode(deleteBtn);
+}
+
+function deleteNode(deleteBtn){
+  const clickedNote = deleteBtn.parentNode.parentNode;
+  const idNoteToDelete = clickedNote.id;
+  const noteToDelete = noteStored.find(({idNode}) => idNode === idNoteToDelete);
+
+  noteStored.splice(noteStored.indexOf(noteToDelete), 1);
+
+  const nodeToDelete = document.getElementById(idNoteToDelete);
+  document.querySelector('#notes').removeChild(nodeToDelete);
+
+  // localStorage.clear();
+  localStorage.setItem('notes', JSON.stringify(noteStored));
+
+  
 }
 
 function getStoredData() {
@@ -142,19 +179,12 @@ function handleElementClick(ev){
   if(v.id === "footer"){
     v = ev.target.parentNode.parentNode;
   }
-  console.log(v);
-
-  // console.log(ev.target);
-  // console.log(ev.target.parentNode.parentNode);
 
  const checkedIcon = v.querySelector('.hid');
  const checkedIcons = v.querySelectorAll('.hidd');
 
- //console.log(checkedIcon);
- //console.log(checkedIcon_prev);
   if((checkedIcon_prev != null) && (checkedIcons_prev != null) &&(checkedIcon != null) && (checkedIcons != null))  {
     checkedIcon_prev.style.display = 'none';
-    // checkedIcons_prev.style.display = 'none';
     for( let value of checkedIcons_prev){
       value.style.display = 'none';
     }
@@ -164,14 +194,11 @@ function handleElementClick(ev){
   checkedIcon_prev = checkedIcon;
   checkedIcon.style.display = 'block'; 
   checkedIcons_prev = checkedIcons;
-  // checkedIcons[1].style.display = 'block'; 
   for( let value of checkedIcons){
     value.style.display = 'inline';
   }
-  // checkedIcons.map((value) => {value.style.display = 'block';})
 
 }
-
 
 
 function bindEvents(){
@@ -180,21 +207,18 @@ function bindEvents(){
   submit.addEventListener('click', handleSubmitClick);
 
   function handleNewNoteClick(ev){
-      console.log("Hello2");
       ev.stopPropagation();
       toggle(true);
   }
 
   function handlePageBodyClick(ev){
-    console.log("Hello3");
+    ev.stopPropagation();
     if((checkedIcon_prev != null) && (checkedIcons_prev != null)) {
       checkedIcon_prev.style.display = 'none';
-      // checkedIcons_prev.style.display = 'none';
       for( let value of checkedIcons_prev){
         value.style.display = 'none';
       }
     }
-    ev.stopPropagation();
     toggle(false);
   }
 
@@ -203,9 +227,6 @@ function bindEvents(){
     saveNode();
     toggle(false);
   } 
-  
-
-
   
 }
 

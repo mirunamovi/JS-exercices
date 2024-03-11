@@ -28,6 +28,10 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  border: 2px solid black;
+  border-radius: 11px;
+  height: 73px;
+
 }
 
 input {
@@ -69,7 +73,6 @@ input {
   gap: 20px;
 }
 
-
 .note-area-content {
   width: 40vw;
   max-width: 300px;
@@ -98,25 +101,6 @@ input {
 .hid, .hidd {
   display: none;
 }
-/* 
-.note-area-content-footer{
-  display: none;
-
-} */
-
-/* .fa-circle-check:before {
-  display: block;
-} */
-
-/* .note-area-content:hover .fa-check-circle::before,
-.note-area-content:hover .fa-circle-check::before {
-  display: block;
-  position: absolute;
-  top: 0%;
-  left: -4%;
-  transform: translate(-4%, -5%);
-  opacity: 0.5;
-} */
 
 
 @media screen and (max-width: 700px) {
