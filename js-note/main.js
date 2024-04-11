@@ -5,6 +5,8 @@ const pageBody = document.body;
 const title = document.getElementById('title');
 const description = document.getElementById('description');
 const icons = document.getElementById('icons');
+const color = document.getElementById('color');
+
 const newNote = document.getElementById('creating-note');
 const submit = document.getElementById('submit');
 
@@ -19,6 +21,7 @@ const element = template.querySelector('.note-area-content');
 let isClicked = false;
 let checkedIcon_prev = null;
 let checkedIcons_prev = null;
+
 
 
 
@@ -58,6 +61,7 @@ function changeInputOnToggleState(title, newNote, icons) {
       newNote.style.borderRadius = '11px';
       newNote.style.padding = '10px';
 
+
       icons.style.display = 'none';
   } else {
       title.style.display = 'block';
@@ -76,10 +80,11 @@ function changeInputOnToggleState(title, newNote, icons) {
 
 function getNodeData(){
   if(title.value !== '' && description.value !== ''){
+
     const titleNode = title.value;
-    console.log(titleNode);
+
     const descriptionNode = description.value;
-    console.log(descriptionNode);
+
     const idNode = guid();
     const noteData = { idNode, titleNode, descriptionNode};
 
@@ -104,6 +109,7 @@ function guid() {
 function resetInputFields() {
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
+  //todocontainer.innerhtml='';
 }
 
 function saveNode(){
@@ -124,6 +130,8 @@ function renderNote(data) {
 
   const newNoteElement = document.importNode(templateContent, true);
 
+  // const todoElement = todoTempate.content.cloneNode(true);
+
   const idElement = newNoteElement.querySelector('.note-area-content');
   const titleElement = newNoteElement.querySelector('.note-area-content-title');
   const bodyElement = newNoteElement.querySelector('.note-area-content-body');
@@ -134,9 +142,12 @@ function renderNote(data) {
   bodyElement.textContent = data.descriptionNode;
 
 
-  document.querySelector('#notes').appendChild(newNoteElement);
+  document.querySelector('#notes').appendChild(newNoteElement); //todocontainer.querySelector('#notes').appendChild(newNoteElement);
   document.querySelector('#' + data.idNode).addEventListener('click', handleElementClick);
   document.querySelector('#' + data.idNode).querySelector('.fa-trash').addEventListener('click', handleDeleteClick);
+  document.querySelector('#' + data.idNode).querySelector('.fa-edit').addEventListener('click', handleEditClick);
+  
+
 
 }
 
@@ -145,6 +156,58 @@ function handleDeleteClick(ev){
   let deleteBtn = ev.target;
   deleteNode(deleteBtn);
 }
+
+function handleEditClick(ev){
+  ev.stopPropagation();
+  let editBtn = ev.target;
+  console.log('is clicked');
+
+  // editNode(editBtn);
+  openDialog(editBtn);
+}
+
+
+function openDialog(editBtn){
+  const clickedNote = editBtn.parentNode.parentNode;
+  const idNoteToEdit = clickedNote.id;
+  const noteToEdit = noteStored.find(({idNode}) => idNode === idNoteToEdit);
+
+
+  const backdrop = document.getElementsByClassName('modal-backdrop')[0];
+  const dialog = document.getElementsByClassName('dialog')[0];
+
+  const titleInput = document.querySelector('[title]');
+  const descriptionInput = document.querySelector('[description]');
+  const cancel = document.querySelector('.cancel');
+  const confirm = document.querySelector('.confirm');
+
+  backdrop.style.display = 'block'; 
+  dialog.style.display = 'flex'; 
+  titleInput.value = noteToEdit.titleNode;
+  descriptionInput.value = noteToEdit.descriptionNode;
+  
+  cancel.addEventListener('click', handleCancelClick);
+  confirm.addEventListener('click', handleConfirmClick);
+
+  function handleCancelClick(ev){
+    ev.stopPropagation();
+    backdrop.style.display = 'none'; 
+    dialog.style.display = 'none';   
+  }
+
+  function handleConfirmClick(ev){
+    ev.stopPropagation();
+    noteToEdit.titleNode = titleInput.value;
+    noteToEdit.descriptionNode = descriptionInput.value
+    localStorage.setItem('notes', JSON.stringify(noteStored));  
+    backdrop.style.display = 'none'; 
+    dialog.style.display = 'none';
+  }
+}
+
+
+
+
 
 function deleteNode(deleteBtn){
   const clickedNote = deleteBtn.parentNode.parentNode;
@@ -156,21 +219,14 @@ function deleteNode(deleteBtn){
   const nodeToDelete = document.getElementById(idNoteToDelete);
   document.querySelector('#notes').removeChild(nodeToDelete);
 
-  // localStorage.clear();
-  localStorage.setItem('notes', JSON.stringify(noteStored));
-
-  
+  localStorage.setItem('notes', JSON.stringify(noteStored));  
 }
 
 function getStoredData() {
   noteStored = JSON.parse(localStorage.getItem('notes') || '[]');
 }
 
-function renderStoredNotes() {
-  noteStored.forEach(function (note) {
-      renderNote(note);
-  });
-}
+
 
 function handleElementClick(ev){
   ev.stopPropagation();  // sa nu faca click pe body
@@ -229,4 +285,6 @@ function bindEvents(){
   } 
   
 }
+
+
 
