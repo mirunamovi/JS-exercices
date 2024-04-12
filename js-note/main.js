@@ -47,14 +47,16 @@ function toggle(x){
   if(!isToggled && !x){
     return;
   }
-  changeInputOnToggleState(title, newNote, icons);
+  changeInputOnToggleState(title, newNote, icons, color);
   isToggled = !isToggled;
 
 }
 
-function changeInputOnToggleState(title, newNote, icons) {
+function changeInputOnToggleState(title, newNote, icons, color) {
   if (isToggled) {
       title.style.display = 'none';
+
+      color.style.display = 'none';
 
       newNote.style.height = '73px';
       newNote.style.border = '2px solid black';
@@ -67,6 +69,11 @@ function changeInputOnToggleState(title, newNote, icons) {
       title.style.display = 'block';
       title.style.border = 'none';
       title.style.paddingBottom = '30px';
+
+      color.style.display = 'block';
+      color.style.width = '100px';
+      color.style.selfItems = 'flex-start';
+      color.style.color = '#ffffff';
 
       newNote.style.height = 'auto';
       newNote.style.border = '2px solid black';
@@ -86,8 +93,9 @@ function getNodeData(){
     const descriptionNode = description.value;
 
     const idNode = guid();
-    const noteData = { idNode, titleNode, descriptionNode};
 
+    const colorNode = color.value;
+    const noteData = { idNode, titleNode, descriptionNode, colorNode};
     resetInputFields()
     return noteData;
   }
@@ -129,7 +137,7 @@ function renderNote(data) {
   const templateContent = template.content;
 
   const newNoteElement = document.importNode(templateContent, true);
-
+  console.log(newNoteElement);
   // const todoElement = todoTempate.content.cloneNode(true);
 
   const idElement = newNoteElement.querySelector('.note-area-content');
@@ -140,7 +148,7 @@ function renderNote(data) {
   idElement.id = data.idNode;
   titleElement.textContent = data.titleNode;
   bodyElement.textContent = data.descriptionNode;
-
+  idElement.style.backgroundColor = data.colorNode;
 
   document.querySelector('#notes').appendChild(newNoteElement); //todocontainer.querySelector('#notes').appendChild(newNoteElement);
   document.querySelector('#' + data.idNode).addEventListener('click', handleElementClick);
@@ -178,14 +186,18 @@ function openDialog(editBtn){
 
   const titleInput = document.querySelector('[title]');
   const descriptionInput = document.querySelector('[description]');
+  const colorInput = document.querySelector('[color]');
+
   const cancel = document.querySelector('.cancel');
   const confirm = document.querySelector('.confirm');
 
   backdrop.style.display = 'block'; 
   dialog.style.display = 'flex'; 
+  
   titleInput.value = noteToEdit.titleNode;
   descriptionInput.value = noteToEdit.descriptionNode;
-  
+  colorInput.value = noteToEdit.colorNode;
+
   cancel.addEventListener('click', handleCancelClick);
   confirm.addEventListener('click', handleConfirmClick);
 
@@ -199,6 +211,7 @@ function openDialog(editBtn){
     ev.stopPropagation();
     noteToEdit.titleNode = titleInput.value;
     noteToEdit.descriptionNode = descriptionInput.value
+    noteToEdit.colorNode = colorInput.value;
     localStorage.setItem('notes', JSON.stringify(noteStored));  
     backdrop.style.display = 'none'; 
     dialog.style.display = 'none';
