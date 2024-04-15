@@ -11,36 +11,33 @@
 <body>
   <section  id="creating-note" class="creating-note">
       <input class="title hidden" type="text" placeholder="Title" name="title" id="title">
-      <input class="description" type="text" placeholder="Take a note.." name="description" id="description">
-      <!-- <label for="color">Color</label> -->
+      <input class="description" aria-multiline="true" type="text" placeholder="Take a note.." name="description" id="description">
       <input class="color hidden" name="color " id="color" type="color" required />
-      <!-- <input name="url" id="url" type="url" /> -->
       <div class="icons hidden" id="icons">
-          <i class="fa-regular fa-image"></i>
+          <!-- <i class="fa-regular fa-image"></i> -->
           <button id="submit" class="note-btn">Done</button>
       </div>
   </section>
   <div class="notes" id="notes">
     <template id="noteTemplate">
-      <div class="note-area-content">
-        <!-- <i id="checkedIcon" class="fa-solid fa-circle-check fa-2xl hid"></i> -->
-        <h3 class="note-area-content-title"></h3>
-        <p class="note-area-content-body"></p>
-        <!-- <img src="" alt=""> -->
-        <div id="footer" class="note-area-content-footer">
-          <i class="fa-regular fa fa-edit hidd"></i>
-          <i class="fa-solid fa-trash hidd"></i>
-          <div class="color-palette"></div>
+      <div class="note-container">
+        <div class="note-area-content">
+          <i id="checkedIcon" class="fa-solid fa-circle-check fa-2xl hid"></i>
+          <h3 class="note-area-content-title"></h3>
+          <p class="note-area-content-body"></p>
+          <div id="footer" class="note-area-content-footer">
+            <i class="fa-regular fa fa-edit hidd"></i>
+            <i class="fa-solid fa-trash hidd"></i>
+            <div class="color-palette"></div>
+          </div>
         </div>
       </div>
-      <i id="checkedIcon" class="fa-solid fa-circle-check fa-2xl hid"></i>
 
     </template>
   </div>
   <div class="modal-backdrop"></div>
     <div class="dialog">
         <span class="header"></span>
-        <!-- <div class="exit-icon"><i class="fa-solid fa-xmark fa-lg exit"></i></div> -->
          <input title type="text">
          <input description type="text">
          <input color name="color " id="color" type="color"/>

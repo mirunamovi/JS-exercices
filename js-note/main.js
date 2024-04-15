@@ -6,7 +6,6 @@ const title = document.getElementById('title');
 const description = document.getElementById('description');
 const icons = document.getElementById('icons');
 const color = document.getElementById('color');
-
 const newNote = document.getElementById('creating-note');
 const submit = document.getElementById('submit');
 
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function init() {
-  console.log(isToggled);
   getStoredData();
   noteStored.forEach(function (note) {
     renderNote(note);
@@ -89,13 +87,12 @@ function getNodeData(){
   if(title.value !== '' && description.value !== ''){
 
     const titleNode = title.value;
-
     const descriptionNode = description.value;
-
     const idNode = guid();
-
     const colorNode = color.value;
-    const noteData = { idNode, titleNode, descriptionNode, colorNode};
+    const checkedNode = false;
+
+    const noteData = { idNode, titleNode, descriptionNode, colorNode, checkedNode};
     resetInputFields()
     return noteData;
   }
@@ -138,25 +135,28 @@ function renderNote(data) {
 
   const newNoteElement = document.importNode(templateContent, true);
   console.log(newNoteElement);
-  // const todoElement = todoTempate.content.cloneNode(true);
+  // const todoElement = todoTemplate.content.cloneNode(true);
 
-  const idElement = newNoteElement.querySelector('.note-area-content');
+  const noteContainer = newNoteElement.querySelector('.note-container');
+  const noteCard = newNoteElement.querySelector('.note-area-content');
   const titleElement = newNoteElement.querySelector('.note-area-content-title');
   const bodyElement = newNoteElement.querySelector('.note-area-content-body');
 
-
-  idElement.id = data.idNode;
+  noteContainer.id = data.idNode;
   titleElement.textContent = data.titleNode;
   bodyElement.textContent = data.descriptionNode;
-  idElement.style.backgroundColor = data.colorNode;
+  noteCard.style.backgroundColor = data.colorNode;
+
+  if(data.checkedNode){
+    noteCard.style.border = '5px solid green';
+  }
+
 
   document.querySelector('#notes').appendChild(newNoteElement); //todocontainer.querySelector('#notes').appendChild(newNoteElement);
   document.querySelector('#' + data.idNode).addEventListener('click', handleElementClick);
   document.querySelector('#' + data.idNode).querySelector('.fa-trash').addEventListener('click', handleDeleteClick);
   document.querySelector('#' + data.idNode).querySelector('.fa-edit').addEventListener('click', handleEditClick);
-  
-
-
+  document.querySelector('#' + data.idNode).querySelector('.fa-circle-check').addEventListener('click', handleCheckClick);
 }
 
 function handleDeleteClick(ev){
@@ -174,9 +174,25 @@ function handleEditClick(ev){
   openDialog(editBtn);
 }
 
+function handleCheckClick(ev) {
+  ev.stopPropagation();
+  let checkBtn = ev.target;
+ checkedNode(checkBtn);
+  
+}
+
+function checkedNode(checkBtn){
+  const clickedNote = checkBtn.parentNode.parentNode;
+  const idNoteToCheck = clickedNote.id;
+  const noteToCheck = noteStored.find(({idNode}) => idNode === idNoteToCheck);
+  noteToCheck.checkedNode = !noteToCheck.checkedNode;
+  localStorage.setItem('notes', JSON.stringify(noteStored)); 
+  location.reload();
+}
+
 
 function openDialog(editBtn){
-  const clickedNote = editBtn.parentNode.parentNode;
+  const clickedNote = editBtn.parentNode.parentNode.parentNode;
   const idNoteToEdit = clickedNote.id;
   const noteToEdit = noteStored.find(({idNode}) => idNode === idNoteToEdit);
 
@@ -210,11 +226,12 @@ function openDialog(editBtn){
   function handleConfirmClick(ev){
     ev.stopPropagation();
     noteToEdit.titleNode = titleInput.value;
-    noteToEdit.descriptionNode = descriptionInput.value
+    noteToEdit.descriptionNode = descriptionInput.value;
     noteToEdit.colorNode = colorInput.value;
     localStorage.setItem('notes', JSON.stringify(noteStored));  
     backdrop.style.display = 'none'; 
     dialog.style.display = 'none';
+    location.reload();
   }
 }
 
@@ -223,7 +240,7 @@ function openDialog(editBtn){
 
 
 function deleteNode(deleteBtn){
-  const clickedNote = deleteBtn.parentNode.parentNode;
+  const clickedNote = deleteBtn.parentNode.parentNode.parentNode;
   const idNoteToDelete = clickedNote.id;
   const noteToDelete = noteStored.find(({idNode}) => idNode === idNoteToDelete);
 
